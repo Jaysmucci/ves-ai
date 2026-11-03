@@ -9,8 +9,8 @@ import PrivacyPage from "@/pages/landing/Privacy";
 
 
 // auth pages
-import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 
 const router = createBrowserRouter([
