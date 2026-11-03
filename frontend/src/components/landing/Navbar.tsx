@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <nav className="relative z-50">
@@ -21,53 +26,54 @@ export function Navbar() {
           >
             Log in
           </a>
-          <Button
-            className="h-9 rounded-full bg-white px-4 text-[13.5px] font-medium text-black hover:bg-white/90"
-          >
+          <Button className="h-9 rounded-full bg-white px-4 text-[13.5px] font-medium text-black hover:bg-white/90">
             <a href="/register">Get Started</a>
           </Button>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-white"
-            onClick={() => setMobileOpen(true)}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
+          {/* Mobile menu - full screen on small devices */}
+          <Sheet>
+            <SheetTrigger>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden text-white"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="w-full max-w-full sm:max-w-sm bg-black text-white border-white/10 p-0"
+            >
+              <SheetHeader className="px-6 pt-6">
+                <SheetTitle className="text-white text-lg">Menu</SheetTitle>
+              </SheetHeader>
+
+              <div className="mt-6 flex flex-col gap-5 px-6 text-base sm:text-lg">
+                <a href="#how" className="py-2">
+                  How it works
+                </a>
+
+                <div className="mt-4 flex flex-col gap-3 pb-6">
+                  <Button
+                    variant="outline"
+                    className="h-11 w-full border-white/20 text-black text-sm sm:text-base rounded-full"
+                  >
+                    <a href="/login" className="w-full">
+                      Log in
+                    </a>
+                  </Button>
+                  <Button className="h-11 w-full bg-white text-black text-sm sm:text-base rounded-full">
+                    <a href="/register" className="w-full">
+                      Start free
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 bg-black md:hidden">
-          <div className="flex h-16 items-center justify-between px-6 border-b border-white/10">
-            <span className="font-semibold">Menu</span>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileOpen(false)}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-          <div className="flex flex-col gap-6 px-6 py-10 text-lg">
-            <a href="#features" onClick={() => setMobileOpen(false)}>
-              Features
-            </a>
-            <a href="#how" onClick={() => setMobileOpen(false)}>
-              How it works
-            </a>
-            <div className="mt-6 flex flex-col gap-3">
-              <Button variant="outline" className="border-white/20 text-black">
-                <a href="/login">Log in</a>
-              </Button>
-              <Button className="bg-white text-black">
-                <a href="/register">Start free</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
